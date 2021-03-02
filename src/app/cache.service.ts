@@ -31,7 +31,7 @@ export class CacheService {
     }
   }
 
-  setCache(url: string, cacheExpirationTime: number, params?: HttpParams) {
+  markAsCacheable(url: string, cacheExpirationTime: number, params?: HttpParams) {
     const newKey = CacheService.generateKey(url,params);
     
     if(newKey && cacheExpirationTime && cacheExpirationTime > 0) {

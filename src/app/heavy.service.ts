@@ -15,7 +15,7 @@ export class HeavyService {
 
   getHeavyRandonNumber(id: number): Observable<HeavyRandomModel> {
     const url: string = `http://localhost:8080/demo/heavyRandomData/${id}`;
-    this.cacheService.setCache(url,2000);
+    this.cacheService.markAsCacheable(url,2000);
     return this.http.get<HeavyRandomModel>(url);
   }
 
