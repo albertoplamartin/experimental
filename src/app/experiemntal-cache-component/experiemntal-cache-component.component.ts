@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ExperimentalCacheService} from 'src/app/experimental-cache.service';
+import { HeavyService} from 'src/app/heavy.service';
 @Component({
   selector: 'app-experiemntal-cache-component',
   templateUrl: './experiemntal-cache-component.component.html',
@@ -7,10 +7,10 @@ import { ExperimentalCacheService} from 'src/app/experimental-cache.service';
 })
 export class ExperiemntalCacheComponentComponent implements OnInit {
 
-  constructor(private experimentalCacheService : ExperimentalCacheService) { }
+  constructor(private HeavyService : HeavyService) { }
 
   ngOnInit(): void {
-    console.log(this.experimentalCacheService.holaMundo());
+
 
   }
 

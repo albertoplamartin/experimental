@@ -4,10 +4,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ExperiemntalCacheComponentComponent } from './experiemntal-cache-component/experiemntal-cache-component.component';
-import { ExperimentalCacheService } from './experimental-cache.service';
+import { HeavyService } from './heavy.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HijoPacoComponent } from './hijo-paco/hijo-paco.component';
 import { HijaMariaComponent } from './hija-maria/hija-maria.component';
+import { CacheService } from './cache.service';
+import { CacheInterceptor } from './cache-interceptor';
 
 
 @NgModule({
@@ -22,7 +24,7 @@ import { HijaMariaComponent } from './hija-maria/hija-maria.component';
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [ExperimentalCacheService],
+  providers: [HeavyService, CacheService, { provide: HTTP_INTERCEPTORS, useClass: CacheInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

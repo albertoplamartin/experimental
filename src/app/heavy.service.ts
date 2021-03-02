@@ -2,34 +2,21 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HeavyRandomModel } from './heavy-random-model';
-import { publishReplay, refCount } from 'rxjs/operators';
+import { CacheService} from 'src/app/cache.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ExperimentalCacheService {
+export class HeavyService {
   private mapHeavyRandom: Map<String, Observable<HeavyRandomModel>>;
-  constructor(private http: HttpClient ) { 
+  constructor(private http: HttpClient, private cacheService: CacheService) { 
     this.mapHeavyRandom = new Map<String, Observable<HeavyRandomModel>>();
-  }
-
-  holaMundo(): string {
-    return 'Hola mundo!!';
   }
 
   getHeavyRandonNumber(id: number): Observable<HeavyRandomModel> {
     const url: string = `http://localhost:8080/demo/heavyRandomData/${id}`;
-    const cacheHeavyRandom$ = this.mapHeavyRandom.get(url);
-    if(!cacheHeavyRandom$) {
-      const observableHeavyRandom$ = this.http.get<HeavyRandomModel>(url).pipe(publishReplay(1),refCount());
-      this.mapHeavyRandom.set(url, observableHeavyRandom$);
-      return observableHeavyRandom$;
-    }
-    else {
-      return cacheHeavyRandom$;
-    }
-    
-
+    this.cacheService.setCache(url,2000);
+    return this.http.get<HeavyRandomModel>(url);
   }
 
    // Clear configs

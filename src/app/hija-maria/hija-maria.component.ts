@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { ExperimentalCacheService } from '../experimental-cache.service';
+import { HeavyService } from '../heavy.service';
 import { HeavyRandomModel } from '../heavy-random-model';
 
 @Component({
@@ -10,7 +10,7 @@ import { HeavyRandomModel } from '../heavy-random-model';
 })
 export class HijaMariaComponent implements OnInit {
   heavyRandomNumber?: HeavyRandomModel;
-  constructor(private experimentalService: ExperimentalCacheService) { 
+  constructor(private experimentalService: HeavyService) { 
     
   }
   ngOnInit(): void {
